@@ -6,6 +6,29 @@ Author URI: http://www.trivisioncreative.com
 Description: Custom theme created by TriVision.
 Version: 2.0
 */
+.quote-brackets {position: relative;padding: 15px 30px;}
+.quote-brackets::after {
+border-right: 1px solid red;
+width: 15px;
+height: 100%;
+content: "";
+position: absolute;
+border-top: 1px solid red;
+border-bottom: 1px solid red;
+right: 0;
+top: 0;
+}
+.quote-brackets::before {
+border-left: 1px solid red;
+width: 15px;
+height: 100%;
+content: "";
+position: absolute;
+border-top: 1px solid red;
+border-bottom: 1px solid red;
+left: 0;
+top: 0;
+}
 .carousel-controls .fa-angle-left::before, .carousel-controls .fa-angle-right::before {font-size:150%;font-weight:bold;padding-left:10px;}
 .loop-link {margin-bottom:25px;}
 .ig_action_bar .ig_data {display:block!important;}
