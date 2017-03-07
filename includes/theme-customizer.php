@@ -116,7 +116,7 @@ class theme_customizer
             'label'   => 'Select Symbol',
             'section' => 'customiser_demo_section',
             'type'    => 'select',
-            'choices' => array("circle" => "fa-circle", "star" => "fa-star", "angle-right" => "fa-angle-right", "none" => "none"),
+            'choices' => array("circle" => "fa-circle", "star" => "fa-star", "angle-right" => "fa-angle-right", "play-triangle" => "fa-play", "none" => "none"),
             'priority' => 4,
 			'description' => 'Font Awesome Symbol'
         ) );
