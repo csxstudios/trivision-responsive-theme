@@ -8,25 +8,25 @@ Version: 2.0
 */
 .quote-brackets {position: relative;padding: 15px 30px;}
 .quote-brackets::after {
-border-right: 1px solid red;
-width: 15px;
+border-right: 15px solid #d1d3d4;
+width: 30px;
 height: 100%;
 content: "";
 position: absolute;
-border-top: 1px solid red;
-border-bottom: 1px solid red;
-right: 0;
+border-top: 15px solid #d1d3d4;
+border-bottom: 15px solid #d1d3d4;
+right: -30px;
 top: 0;
 }
 .quote-brackets::before {
-border-left: 1px solid red;
-width: 15px;
+border-left: 15px solid #d1d3d4;
+width: 30px;
 height: 100%;
 content: "";
 position: absolute;
-border-top: 1px solid red;
-border-bottom: 1px solid red;
-left: 0;
+border-top: 15px solid #d1d3d4;
+border-bottom: 15px solid #d1d3d4;
+left: -30px;
 top: 0;
 }
 .carousel-controls .fa-angle-left::before, .carousel-controls .fa-angle-right::before {font-size:150%;font-weight:bold;padding-left:10px;}
