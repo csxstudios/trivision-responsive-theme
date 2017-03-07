@@ -69,7 +69,7 @@
 				<?php } ?>
 				</div>
 			</div>
-			<?php if($copydivtest == 'separate') { ?>
+			<?php if($copydivtest == 'separate' || $copydivtest == '') { ?>
 			<div id="footer-bottom">
 			<div class="container">
 				<div class="footer-copyright text-center">
