@@ -474,8 +474,10 @@ function custom_loop_func($atts, $content = null){
 		$custlink = get_post_meta(get_the_ID(), 'wpcf-custom-page-link', true);
 		$postimg = esc_url(wp_get_attachment_url(get_post_thumbnail_id()));
 		$custmeta = get_post_meta(get_the_ID(), $metasort, true);
+		$custcolor = get_post_meta(get_the_ID(), 'wpcf-custom-color', true);
 		//if(!$hoverimg) {$hoverimg = get_template_directory_uri().'/images/news-placeholder.jpg';}
 		if(!$custlink) {$link = get_page_link();} else {$link = $custlink;}
+		if($custcolor) {$custstyle = ' style="background-color:'.$custcolor.';"';}
 		$pid = get_the_ID();
 		if (!$postimg) {
 			$attachments = get_children(array('post_parent' => get_the_ID(), 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order'));
@@ -506,7 +508,7 @@ function custom_loop_func($atts, $content = null){
 			<h4 class="strong" style="margin-bottom:3px;"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
 			<?php if ($postdisplay == 'carousel' || $postdisplay == 'cols') {echo '<p class="small">'.get_the_date().'</p>';} ?>
 			<?php } ?>
-			<div class="loop-text">
+			<div class="loop-text"<?php echo $custstyle; ?>>
 			<?php if ($excerpton == 1) {
 				if ($excerptl) {echo excerpt(15);} else {the_excerpt();} 
 			}?>
