@@ -95,6 +95,9 @@
     case "angle-right":
         echo "\\f054";
         break;
+	case "play-triangle":
+        echo "\\f04b";
+        break;
 	case "none":
         echo "";
         break;
