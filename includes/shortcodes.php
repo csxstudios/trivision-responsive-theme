@@ -410,6 +410,7 @@ function custom_loop_func($atts, $content = null){
 		'display'   => 	'',
 		'excerptshow'   => 	'',
 		'excerptl'   => 	'',
+		'imgmore'   => 	'',
 		'wpcftext'   => 	'',
 		'custlayout'   => 	'',
 	), $atts));
@@ -420,6 +421,8 @@ function custom_loop_func($atts, $content = null){
 	$postdisplay = (!empty($display) ? $display : 'li');
 	$modallayout = (!empty($custlayout) ? $custlayout : '218');
 	$column_math = 12 / $columns;
+	if ($imgmore) {$readmore = wp_get_attachment_image_src($imgmore, "large");}
+	if ($imgmore) {$readmoreimg = $readmore[0];}
 	if ($excerptshow == '' || $excerptshow == 1) {$excerpton = 1;}
 	if ($columns == 5) {$column_math= 15;}
 
@@ -491,7 +494,7 @@ function custom_loop_func($atts, $content = null){
 		if(!$postimg) {$postimg = get_template_directory_uri().'/images/news-placeholder.jpg';}
 		if ($postdisplay == 'modals' || $postdisplay == 'cols' || $postdisplay == 'carousel' || $postdisplay =='magazine') { 
 		?>
-			<div class="loop-<?php echo get_the_ID(); ?> loop-post loop-post-<?php echo $counter; ?> col-sm-6 col-md-<?php echo $column_math; if($customclass) {echo ' '.$customclass;} ?>">
+			<div class="loop-<?php echo get_the_ID(); ?> loop-post loop-post-<?php echo $counter; ?> col-sm-6 <?php if ($column_math==15) {echo 'col-lg-'.$column_math.' col-md-4';} else {echo 'col-md-'.$column_math;} if($customclass) {echo ' '.$customclass;} ?>">
 			<?php if ($hoverimg) { ?>
 			<div class="loop-pic wpb_single_image bg-cover" style="background-image:url('<?php echo $postimg;?>');"><figure><a href="<?php echo $link; ?>"><img src="<?php echo $hoverimg;?>" class="img-responsive" alt="<?php the_title(); ?>"></a></figure></div>
 			<?php } if ($postdisplay == 'modals') { ?>
@@ -511,6 +514,7 @@ function custom_loop_func($atts, $content = null){
 			<div class="loop-text"<?php echo $custstyle; ?>>
 			<?php if ($excerpton == 1) {
 				if ($excerptl) {echo excerpt(15);} else {the_excerpt();} 
+				if ($imgmore) {echo '<div class="img-readmore"><a href="'.$link.'"><img src="'.$readmoreimg.'" alt="Read More" /></a></div>';}
 			}?>
 			</div>
 			</div>
@@ -523,7 +527,7 @@ function custom_loop_func($atts, $content = null){
 			<div class="col-md-8">
 			<h4 class="strong"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
 			<?php if ($excerpton == 1) {
-				if ($excerptl) {echo excerpt($excerptl);} else {the_excerpt();} 
+				if ($excerptl) {echo excerpt($excerptl);} else {the_excerpt();}
 			}?>
 			</div>
 			</div>
@@ -719,6 +723,16 @@ if(function_exists('vc_map')){
          "param_name" => "excerptl",
          "value" => "",
          "description" => __("Excerpt length in words (optional)", $trivision_theme_name )
+      ),
+	  array(
+         "type" => "attach_image",
+         "holder" => "",
+         "class" => "",
+         "heading" => __("Read more image (optional)", $trivision_theme_name ),
+         "param_name" => "imgmore",
+		 "admin_label"=>true,
+         "value" => "",
+         "description" => __("Add a read more image (optional)", $trivision_theme_name )
       ),
 	  array(
          "type" => "textfield",
