@@ -107,7 +107,7 @@
 	?>';}
 	<?php if ($headertest == 'above') { echo '#top-menu {border-bottom: solid 1px rgba(0,0,0,.1)!important;}';} ?>
 	<?php if ($inverttest == 'knockout') { echo '.header-scroll svg g * {fill: #fff!important;}';} ?>
-	<?php if ($linktest) { echo 'a, #simple-menu i, #top-menu ul.social-list li a, #top-menu ul.social-list li i, .navbar-default .navbar-nav > li > a, .nav > li > a {color:'.$linktest.';}';} 
+	<?php if ($linktest) { echo '#header a, #footer a, #simple-menu i, #top-menu ul.social-list li a, #top-menu ul.social-list li i, .navbar-default .navbar-nav > li > a, .nav > li > a {color:'.$linktest.';}';} 
 	if ($linktest && $linktest!='#ffffff') { echo 'h1, h2, h3 {color:'.$linktest.';}';} 
 	?>
 	<?php if ($footerdark) { ?>
