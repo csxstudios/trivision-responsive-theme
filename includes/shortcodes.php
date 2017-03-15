@@ -487,7 +487,7 @@ function custom_loop_func($atts, $content = null){
 			if ( ! is_array($attachments) ) continue;
 			//$count = count($attachments);
 			$first_attachment = array_shift($attachments);
-			$postimg = wp_get_attachment_image_src($first_attachment->ID);
+			$postimg = wp_get_attachment_image_src($first_attachment->ID, 'large');
 			if ( ! is_array($postimg) ) continue;
 			$postimg = $postimg[0];
 		}
@@ -509,7 +509,10 @@ function custom_loop_func($atts, $content = null){
 			<div class="loop-pic" style="background-image:url(<?php echo $postimg;?>);background-size:cover;"><h2 class="strong"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h2></div>
 			<?php } else { ?>
 			<h4 class="strong" style="margin-bottom:3px;"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
-			<?php if ($postdisplay == 'carousel' || $postdisplay == 'cols') {echo '<p class="small">'.get_the_date().'</p>';} ?>
+			<?php if ($postdisplay == 'carousel' || $postdisplay == 'cols') {
+					if ($wpcftext) {echo '<p class="small">'.get_post_meta(get_the_ID(), $wpcftext, true).'</p>';} else {echo '<p class="small">'.get_the_date().'</p>';}
+				} 
+			?>
 			<?php } ?>
 			<div class="loop-text"<?php echo $custstyle; ?>>
 			<?php if ($excerpton == 1) {
