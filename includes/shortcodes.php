@@ -498,14 +498,14 @@ function custom_loop_func($atts, $content = null){
 			<?php if ($hoverimg) { ?>
 			<div class="loop-pic wpb_single_image bg-cover" style="background-image:url('<?php echo $postimg;?>');"><figure><a href="<?php echo $link; ?>"><img src="<?php echo $hoverimg;?>" class="img-responsive" alt="<?php the_title(); ?>"></a></figure></div>
 			<?php } if ($postdisplay == 'modals') { ?>
-			<div class="loop-pic wpb_single_image img-scale"><figure><a href="#" data-toggle="modal" data-target="#modal-<?php echo get_the_ID(); ?>"><img src="<?php echo $postimg;?>" class="text-center" alt="<?php the_title(); ?>"></a></figure></div>
+			<div class="loop-pic wpb_single_image img-scale"><figure><a href="#" data-toggle="modal" data-target="#modal-<?php echo get_the_ID(); ?>"><img src="<?php echo $postimg;?>" class="text-center" alt="<?php echo get_the_title(); ?>"></a></figure></div>
 			<?php } if ($postdisplay == 'carousel' || $postdisplay == 'cols') { ?>
 			<div class="loop-pic wpb_single_image img-scale"><figure><a href="<?php echo $link; ?>"><img src="<?php echo $postimg;?>" class="img-responsive" alt="<?php the_title(); ?>"></a></figure></div>
 			<?php } ?>
 			<div class="loop-link headline-font<?php if ($postdisplay == 'magazine') {echo ' col-magazine';}?>">
 			<?php if ($postdisplay == 'modals') { ?>
 			<h4 class="strong" style="color: #253a74!important;"><a href="#" data-toggle="modal" data-target="#modal-<?php echo get_the_ID(); ?>"><?php the_title(); ?><?php if ($wpcftext) { ?><br/><small style="line-height:1.4em;">Class of <?php echo get_post_meta(get_the_ID(), $wpcftext, true); ?></small><?php } ?></a></h4>
-			<?php } if ($postdisplay == 'magazine') { ?>
+			<?php } elseif ($postdisplay == 'magazine') { ?>
 			<div class="loop-pic" style="background-image:url(<?php echo $postimg;?>);background-size:cover;"><h2 class="strong"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h2></div>
 			<?php } else { ?>
 			<h4 class="strong" style="margin-bottom:3px;"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
