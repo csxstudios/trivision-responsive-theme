@@ -510,6 +510,7 @@ function custom_loop_func($atts, $content = null){
 			<?php } else { ?>
 			<h4 class="strong" style="margin-bottom:3px;"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
 			<?php if ($postdisplay == 'carousel' || $postdisplay == 'cols') {
+					//show custom field text
 					if ($wpcftext) {echo '<p class="small">'.get_post_meta(get_the_ID(), $wpcftext, true).'</p>';} else {echo '<p class="small">'.get_the_date().'</p>';}
 				} 
 			?>
