@@ -76,7 +76,7 @@
 	#body a:hover, #body-home a:hover, .sidr .current-menu-item > a {color:<?php echo $accenttest; ?>;}
 	#main-header .nav > li > a:hover, #main-header .nav > li > a:focus, #scroll-header .nav > li > a:hover, #scroll-header .nav > li > a:focus, ul.social-list li a:hover, ul.social-list li a:hover i, #main-header .nav > li > a:after, .breadcrumb a,	#top-menu .nav > li > a:hover, #main-header .nav > li > a:focus, #footer a:hover, #footer-bottom a:hover, .accent, .covers-3d .wpb_wrapper:hover .wpb_text_column a, .sidr ul li:hover>a, #footer a:hover, .current-menu-parent > a, #primary-nav .current-menu-item.dropdown > a, .dropdown-menu .current-menu-item a {color:<?php echo $accenttest; ?>!important;}
 	#footer {<?php if($watermarktest){ echo 'background:'.$footerbg.' url('.$watermarktest.') no-repeat right bottom;';} else {echo 'background-color:'.$footerbg.';';} ?>}
-	.img-scale figure:hover, .date-box {<?php  echo 'background-color:'.$accenttest; ?>}
+	.img-scale figure:hover, .date-box {background-color: rgba(<?php echo $menudropdownbg; ?>, 0.1)!important;}
 	.dropdown-menu {background-color: rgba(<?php echo $menudropdownbg; ?>, <?php echo $opacityval2; ?>)!important;}	
 	#footer-bottom {background-color: rgba(<?php echo $menudropdownbg; ?>, 1)!important;}	
 	#header {background-color: rgba(<?php if ($headertest == 'above') { echo '255,255,255,.85';} else {echo $menudropdownbg.', '.$opacityval2;} ?>);}

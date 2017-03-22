@@ -421,6 +421,7 @@ transition: all .5s ease;
 -ms-transform:scale(1.25); /* IE 9 */
 -o-transform:scale(1.25); /* Opera */
  transform:scale(1.25);
+ opacity:1;
 }
 .bg-scale:hover {background-size:100%;}
 .modal-body .container {width: 100%;}
