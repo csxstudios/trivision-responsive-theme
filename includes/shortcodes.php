@@ -600,7 +600,7 @@ function custom_loop_func($atts, $content = null){
 						<?php if ($postimg) { ?>
 						<div class="col-md-4">
 						<img class="img-responsive" src="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" alt="<?php the_title(); ?>" />
-						<div class="bio-quick-facts pad-20"><?php echo types_render_field("bio-quick-facts", array( )); ?></div>
+						<div class="bio-quick-facts pad-20"><?php if(types_render_field('bio-quick-facts', array('raw'=>'true'))){ echo types_render_field("bio-quick-facts", array( ));} ?></div>
 						</div>
 						<?php } ?>
 						<div class="col-md-8">
@@ -617,23 +617,9 @@ function custom_loop_func($atts, $content = null){
 					<?php } ?>
 				</div>
 				</div>
+				</div>
 			</div>
 		</div>
-		<?php $iframetest = get_the_content();
-		preg_match  ('/<iframe(.+)\"/', $iframetest, $matches);
-		if ($matches !=""){
-		$hasiframe = true;}
-		?>
-		<?php if (!$hasiframe)
-		{ ?>
-		<script>
-		$("#modal-<?php echo get_the_ID(); ?>").on('hidden.bs.modal', function (e) {
-		$("#modal-<?php echo get_the_ID(); ?> iframe").attr("src", $("#modal-<?php echo get_the_ID(); ?>").attr("src"));
-		});
-		</script>
-		<?php } else {
-		//do something else
-		} ?>
 		<?php endwhile; wp_reset_postdata(); ?>
 		</section>
 		<?php } ?>
