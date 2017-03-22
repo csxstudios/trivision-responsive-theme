@@ -32,8 +32,9 @@
 						foreach ($social_array as $social) {
 							$social_acct = 'text_'.$social;
 							$social_link = get_theme_mod( $social_acct );
-							if ($social == 'envelope') {$social_link = 'mailto:'.get_theme_mod( $social_acct );}
-							if ($social_link) {echo '<li><a target="_blank" href="'.$social_link.'"><i class="fa fa-'.$social.' fa-lg"></i></a></li>';}
+							$social_target = '_blank';
+							if ($social == 'envelope') {$social_link = 'mailto:'.get_theme_mod( $social_acct );$social_target = '_self';}
+							if ($social_link) {echo '<li class="hidden-sm hidden-xs"><a target="'.$social_target.'" href="'.$social_link.'"><i class="fa fa-'.$social.' fa-lg"></i></a></li>';}
 							$social_test .= $social_link;
 						}
 						if (!$social_test) { ?>
