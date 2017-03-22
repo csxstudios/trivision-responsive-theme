@@ -375,7 +375,8 @@
 				}
 				switch ($posttest) {
 					case "post" :
-						$posttitle = "News";
+						$category = get_the_category(); 
+						$posttitle = $category[0]->cat_name;
 					break;
 					case "event" :
 						$posttitle = "Event";
@@ -385,7 +386,7 @@
 				}
 				?>
 				<section id="body-page">
-				<div id="page-heading" class="heading-transparent text-center" style="<?php if($posttitle=='Events') {echo 'padding:0;';}?>background-color:<?php echo $linktest; ?>;background-image:url(<?php echo $bannerimg; ?>);">
+				<div id="page-heading" class="heading-transparent text-center" style="background-color:<?php echo $linktest; ?>;background-image:url(<?php echo $bannerimg; ?>);">
 				<div class="header-bg"></div>
 					<div class="container">
 					<div id="page-heading-<?php echo $titlealign; ?>">

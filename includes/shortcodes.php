@@ -446,15 +446,27 @@ function custom_loop_func($atts, $content = null){
 			$output.= '<div class="row">';
 			echo $output;
 		}
-		$args2 = array(
-		'post_type' => $posttype,
-		'category_name' => $postcat,
-		'posts_per_page' => $maxposts,
-		//'orderby' => 'meta_value',
-		//'meta_key' => 'wpcf-speaker-last-name',
-		'order' => $sort,
-		//'meta_query'	=> array('relation'	=> 'AND', array('key' => 'wpcf-speaker-heirarchy', 'value' => 'keynote', 'compare' => '=',),),
-		);
+		if ($maxposts < 0) {
+			$args2 = array(
+			'post_type' => $posttype,
+			'category_name' => $postcat,
+			'posts_per_page' => $maxposts,
+			//'orderby' => 'meta_value',
+			//'meta_key' => 'wpcf-speaker-last-name',
+			'order' => $sort,
+			//'meta_query'	=> array('relation'	=> 'AND', array('key' => 'wpcf-speaker-heirarchy', 'value' => 'keynote', 'compare' => '=',),),
+			);
+		} else {
+			global $paged;
+			$curpage = $paged ? $paged : 1;
+			$args2 = array(
+			'post_type' => $posttype,
+			'category_name' => $postcat,
+			'posts_per_page' => $maxposts,
+			'order' => $sort,
+			'paged' => $paged,
+			);
+		}
 		$args3 = array(
 		'post_type' => $posttype,
 		'category_name' => $postcat,
@@ -538,7 +550,7 @@ function custom_loop_func($atts, $content = null){
 		<?php }
 		if ($postdisplay == 'carousel' AND $row == 1) {echo '</div></div><div class="item"><div class="row">';}
 		endwhile;
-		wp_reset_postdata();
+		
 		if ($postdisplay == "carousel") {
 			$output = '</div>';
 			$output.= '</div>';
@@ -546,9 +558,21 @@ function custom_loop_func($atts, $content = null){
 
 			$output.= '</div>';
 			echo $output;
-		}
-		?>
-        </section>
+		} ?>
+		</section>
+		<?php if ($maxposts > 0 AND $postdisplay != 'carousel') { echo '
+		<div id="page-links" class="text-center">
+			<a class="first page button" href="'.get_pagenum_link(1).'">&laquo;</a>
+			<a class="previous page button" href="'.get_pagenum_link(($curpage-1 > 0 ? $curpage-1 : 1)).'">&lsaquo;</a>';
+			for($i=1;$i<=$custom_query->max_num_pages;$i++)
+				echo '<a class="'.($i == $curpage ? 'active ' : '').'page button" href="'.get_pagenum_link($i).'">'.$i.'</a>';
+			echo '
+			<a class="next page button" href="'.get_pagenum_link(($curpage+1 <= $custom_query->max_num_pages ? $curpage+1 : $custom_query->max_num_pages)).'">&rsaquo;</a>
+			<a class="last page button" href="'.get_pagenum_link($custom_query->max_num_pages).'">&raquo;</a>
+		</div>
+		'; }
+		wp_reset_postdata();
+		?>        
 		<?php if ($postdisplay == 'modals') { ?>
 		<section class="cust-modals">
 		<?php
@@ -562,12 +586,24 @@ function custom_loop_func($atts, $content = null){
 					<button class="close" type="button" data-dismiss="modal"><img class="svg" src="<?php bloginfo('template_directory');?>/images/icon-close.svg" alt="close" /></button>
 				</div>
 				<div class="modal-body">
-					<div class="row">
+				<div class="panel-body">				
 					<?php if ($modallayout == "218") { ?>
 						<?php if ($postimg) { ?>
 						<div class="col-md-2 col-md-offset-1"><img class="img-responsive" src="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" alt="<?php the_title(); ?>" /></div>
 						<?php $modalcol = '8'; } else {$modalcol = '10';} ?>
 						<div class="col-md-<?php if ($modalcol == '10') {echo $modalcol.' col-md-offset-1';} else {echo $modalcol;}?>">
+						<h1><?php the_title(); ?></h1>
+						<?php the_content(); ?>
+						</div>
+					<?php } ?>
+					<?php if ($modallayout == "bio") { ?>
+						<?php if ($postimg) { ?>
+						<div class="col-md-4">
+						<img class="img-responsive" src="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" alt="<?php the_title(); ?>" />
+						<div class="bio-quick-facts pad-20"><?php echo types_render_field("bio-quick-facts", array( )); ?></div>
+						</div>
+						<?php } ?>
+						<div class="col-md-8">
 						<h1><?php the_title(); ?></h1>
 						<?php the_content(); ?>
 						</div>
@@ -579,7 +615,6 @@ function custom_loop_func($atts, $content = null){
 						<?php the_content(); ?>
 						</div>
 					<?php } ?>
-					</div>
 				</div>
 				</div>
 			</div>
@@ -757,6 +792,7 @@ if(function_exists('vc_map')){
          "value" => array(   
                      __('Col-2-Offset-1, Col-8', $trivision_theme_name) => "218",
 					 __('Full', $trivision_theme_name) => "full",
+					 __('Bio Pic with Custom Details', $trivision_theme_name) => "bio",
                     ),
          "description" => __("Custom layout (optional).", $trivision_theme_name)
       ),
