@@ -107,7 +107,7 @@
 	?>';}
 	<?php if ($headertest == 'above') { echo '#top-menu {border-bottom: solid 1px rgba(0,0,0,.1)!important;}';} ?>
 	<?php if ($inverttest == 'knockout') { echo '.header-scroll svg g * {fill: #fff!important;}';} ?>
-	<?php if ($linktest) { echo '#header a, #footer a, #simple-menu i, #top-menu ul.social-list li a, #top-menu ul.social-list li i, .navbar-default .navbar-nav > li > a, .nav > li > a {color:'.$linktest.';}';} 
+	<?php if ($linktest) { echo '#body a, #body-home a, #footer a, #simple-menu i, #top-menu ul.social-list li a, #top-menu ul.social-list li i, .navbar-default .navbar-nav > li > a, .nav > li > a {color:'.$linktest.';}';} 
 	if ($linktest && $linktest!='#ffffff') { echo 'h1, h2, h3 {color:'.$linktest.';}';} 
 	?>
 	<?php if ($footerdark) { ?>
@@ -196,10 +196,11 @@
 						?>
 						<li class="hidden-sm hidden-xs"><a href="#" data-toggle="modal" data-target="#search"><i class="fa fa-search" aria-hidden="true"></i></a></li>
 						<?php 
-						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'envelope');
+						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'linkedin', 'envelope');
 						foreach ($social_array as $social) {
 							$social_acct = 'text_'.$social;
 							$social_link = get_theme_mod( $social_acct );
+							if ($social == 'envelope') {$social_link = 'mailto:'.get_theme_mod( $social_acct );}
 							if ($social_link) {echo '<li class="hidden-sm hidden-xs"><a target="_blank" href="'.$social_link.'"><i class="fa fa-'.$social.' fa-lg"></i></a></li>';}
 							$social_test .= $social_link;
 						}

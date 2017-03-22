@@ -28,10 +28,11 @@
 					<?php endif; ?>
 					<ul class="social-list">
 						<?php 
-						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'envelope');
+						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'linkedin', 'envelope');
 						foreach ($social_array as $social) {
 							$social_acct = 'text_'.$social;
 							$social_link = get_theme_mod( $social_acct );
+							if ($social == 'envelope') {$social_link = 'mailto:'.get_theme_mod( $social_acct );}
 							if ($social_link) {echo '<li><a target="_blank" href="'.$social_link.'"><i class="fa fa-'.$social.' fa-lg"></i></a></li>';}
 							$social_test .= $social_link;
 						}
