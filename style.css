@@ -63,15 +63,6 @@ top: 0;
     padding-left: 20px!important;
     position: relative;
 }
-.vc_tta-panel-body li:before {
-    font-family: FontAwesome;
-    color: #B3B300;
-    content:"\f005";
-    position: absolute;
-    left: 0;
-    color: #faaf40!important;
-    font-size: 12px;
-}
 .vc_tta-panel-body li {padding-bottom:5px;}
 .vc_tta-tabs-list {
   border-bottom: 1px solid transparent;
@@ -188,7 +179,6 @@ padding-right: 15px;
 .header-scroll #simple-menu i {color:#fff!important;}
 .header-scroll .sticky-tel a h3 {color:#fff;}
 .sticky-tel a h3 {padding-right:30px;}
-.headline-font h3, #body h3, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: 'Montserrat',Arial, Helvetica, sans-serif!important;text-transform:uppercase;}
 #footer h3 {font-size: 20px;letter-spacing:0px;text-transform:uppercase;font-weight:700;}
 .wpcf7-submit {margin-top:30px;}
 .wpcf7-submit, .btn-outline {

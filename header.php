@@ -70,6 +70,7 @@
 	html, body {color:#7b7c7c;font-family: '<?php echo $fontfam; ?>', sans-serif;}
 	#sidr {display:none;}
 	.sidr.left {display:block!important;}
+	.headline-font h3, #body h3, #body-home h3, #body-home h4, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: 'Montserrat',Arial, Helvetica, sans-serif;text-transform:uppercase;}
 	#footer h2:before, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, #primary-nav .current-menu-item .dropdown-menu > a {background-color:rgba(<?php echo $menudropdownhoverbg; ?>, .8)!important;}
 	#main-header svg:hover .st99 {fill:<?php echo $accenttest; ?>;}
 	#body a:hover, #body-home a:hover, .sidr .current-menu-item > a {color:<?php echo $accenttest; ?>;}
@@ -83,7 +84,6 @@
 	#body-home, #body-page {padding-top:<?php echo $headerpos; ?>;}
 	#preloader {background-color:<?php echo $preloaderbg; ?>;}
 	.sidr{background-color:<?php echo $copyrightbg; ?>;}
-	.btn-outline:hover {background-color: <?php echo $accenttest; ?>;color: #fff!important;border-color: <?php echo $accenttest; ?>;}
 	#main-header .nav > li > a:after {content: '<?php
 	switch ($symbol) {
     case "circle":
@@ -110,6 +110,8 @@
 	<?php if ($linktest) { echo '#body a, #body-home a, #footer a, #simple-menu i, #top-menu ul.social-list li a, #top-menu ul.social-list li i, .navbar-default .navbar-nav > li > a, .nav > li > a {color:'.$linktest.';}';} 
 	if ($linktest && $linktest!='#ffffff') { echo 'h1, h2, h3 {color:'.$linktest.';}';} 
 	?>
+	.btn-outline:hover {background-color: <?php echo $accenttest; ?>;color: #fff!important;border-color: <?php echo $accenttest; ?>;}
+	.btn-outline {color: <?php echo $accenttest; ?>!important;background-color: rgba(255, 255, 255, 0);border-color: <?php echo $accenttest; ?>;}
 	<?php if ($footerdark) { ?>
 	#footer h3 {color: #fff;}
 	<?php } ?>
