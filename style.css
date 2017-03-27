@@ -175,12 +175,6 @@ background-color: #000;
 transition: left .2s ease;*/
 display:none;
 }
-li.menu-item-has-children > a::after {
-font-family: FontAwesome;
-content: "\f107";
-float: right;
-padding-right: 15px;
-}
 #simple-menu i {padding:44px 0;}
 .header-scroll #simple-menu i {color:#fff!important;}
 .header-scroll .sticky-tel a h3 {color:#fff;}
