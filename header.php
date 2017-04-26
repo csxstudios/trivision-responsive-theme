@@ -386,7 +386,10 @@
 					if($posttest=='page') {$posttitle='Events';}
 				}
 				?>
-				<section id="body-page">
+				<section id="body-page" class="post-<?php echo $posttest; ?>">
+				<?php if ($posttest == "bio") { ?>
+				<div class="wpb_wrapper wow fadeIn animated animated" style="visibility: visible;"><div class="cut2 cut-blue"></div><div class="cut2 cut-green"></div></div>
+				<?php } else { ?>
 				<div id="page-heading" class="heading-transparent text-center" style="background-color:<?php echo $linktest; ?>;background-image:url(<?php echo $bannerimg; ?>);">
 				<div class="header-bg"></div>
 					<div class="container">
@@ -402,5 +405,6 @@
 					<div class="clear"></div>
 					</div>
 				</div>
+				<?php } ?>
 				<?php } ?>
 			
