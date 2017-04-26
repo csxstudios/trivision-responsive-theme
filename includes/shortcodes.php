@@ -486,6 +486,7 @@ function custom_loop_func($atts, $content = null){
 		//$format = get_post_format($post->ID);	
 		//$link_video = get_post_meta(get_the_ID(),'_cmb_link_video', true);
 		$hoverimg = get_post_meta(get_the_ID(), 'wpcf-hover-image', true);
+		$custthumb = get_post_meta(get_the_ID(), 'wpcf-custom-thumbnail', true);
 		$custlink = get_post_meta(get_the_ID(), 'wpcf-custom-page-link', true);
 		$postimg = esc_url(wp_get_attachment_url(get_post_thumbnail_id()));
 		$custmeta = get_post_meta(get_the_ID(), $metasort, true);
@@ -504,6 +505,7 @@ function custom_loop_func($atts, $content = null){
 			$postimg = $postimg[0];
 		}
 		if(!$postimg) {$postimg = get_template_directory_uri().'/images/news-placeholder.jpg';}
+		if ($custthumb) {$postimg = $custthumb;}
 		if ($postdisplay == 'modals' || $postdisplay == 'cols' || $postdisplay == 'carousel' || $postdisplay =='magazine') { 
 		?>
 			<div class="loop-<?php echo get_the_ID(); ?> loop-post loop-post-<?php echo $counter; ?> col-sm-6 <?php if ($column_math==15) {echo 'col-lg-'.$column_math.' col-md-4';} else {echo 'col-md-'.$column_math;} if($customclass) {echo ' '.$customclass;} ?>">
