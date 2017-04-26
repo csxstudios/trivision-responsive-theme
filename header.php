@@ -394,7 +394,7 @@
 				<div class="header-bg"></div>
 					<div class="container">
 					<div id="page-heading-<?php echo $titlealign; ?>">
-						<h1 id="page-title"><?php echo $posttitle; ?></h1>
+						<h1 id="page-title"><?php if ($posttitle) {echo $posttitle;} else {the_title();} ?></h1>
 					</div>
 					<?php if ($titlealign == 'left') { ?>
 					<div id="breadcrumb">
