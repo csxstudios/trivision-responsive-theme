@@ -6,6 +6,12 @@ Author URI: http://www.trivisioncreative.com
 Description: Custom theme created by TriVision.
 Version: 2.0
 */
+figcaption {
+font-size: 90%;
+text-transform: uppercase;
+font-family: Montserrat;
+letter-spacing: 1px;
+}
 .first.page.button, .previous.page.button, .next.page.button, .last.page.button {display:none;}
 a.page.button {padding: 3px 12px;margin: 7px;border: 1px solid #11498a;}
 a.active.page.button {background-color:#11498a;color:#fff!important;}

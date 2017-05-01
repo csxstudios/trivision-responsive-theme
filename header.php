@@ -73,7 +73,7 @@
 	.headline-font h3, #body h3, #body-home h3, #body-home h4, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: 'Montserrat',Arial, Helvetica, sans-serif;text-transform:uppercase;}
 	#footer h2:before, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, #primary-nav .current-menu-item .dropdown-menu > a {background-color:rgba(<?php echo $menudropdownhoverbg; ?>, .8)!important;}
 	#main-header svg:hover .st99 {fill:<?php echo $accenttest; ?>;}
-	#body a:hover, #body-home a:hover, .sidr .current-menu-item > a {color:<?php echo $accenttest; ?>;}
+	#body a:hover, #body-home a:hover, .sidr .current-menu-item > a, figure:hover figcaption {color:<?php echo $accenttest; ?>;}
 	#main-header .nav > li > a:hover, #main-header .nav > li > a:focus, #scroll-header .nav > li > a:hover, #scroll-header .nav > li > a:focus, ul.social-list li a:hover, ul.social-list li a:hover i, #main-header .nav > li > a:after, .breadcrumb a,	#top-menu .nav > li > a:hover, #main-header .nav > li > a:focus, #footer a:hover, #footer-bottom a:hover, .accent, .covers-3d .wpb_wrapper:hover .wpb_text_column a, .sidr ul li:hover>a, #footer a:hover, .current-menu-parent > a, #primary-nav .current-menu-item.dropdown > a, .dropdown-menu .current-menu-item a {color:<?php echo $accenttest; ?>!important;}
 	#footer {<?php if($watermarktest){ echo 'background:'.$footerbg.' url('.$watermarktest.') no-repeat right bottom;';} else {echo 'background-color:'.$footerbg.';';} ?>}
 	.img-scale figure:hover, .date-box {background-color: rgba(<?php echo $menudropdownbg; ?>, 0.1)!important;}
