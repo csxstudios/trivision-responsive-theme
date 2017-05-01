@@ -192,7 +192,7 @@
 								'depth'             => 0,
 								'container'         => '',
 								'items_wrap' => '%3$s',
-								'fallback_cb'       => 'wp_page_menu',
+								'fallback_cb'       => false,
 								'walker'            => '')
 							);
 						?>
