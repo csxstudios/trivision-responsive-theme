@@ -5,7 +5,7 @@
 					<div class="post-title row">
 					<h3 class="strong"><?php the_title(); ?></h3>
 					<p class="small"><?php echo get_the_date(); ?></p>
-					<?php echo synved_social_share_markup(); ?>
+					<?php if (function_exists('synved_social_share_markup')) {echo synved_social_share_markup();} ?>
 					</div>
 					<div class="row pad-30">					
 					<?php the_content(); ?>
