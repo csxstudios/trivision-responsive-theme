@@ -83,7 +83,7 @@
 				if($credittest!='') {$creditdisplay = $credittest;} else {$creditdisplay = "1";}
 				//echo $creditdisplay;
 				echo'&copy;'.$rangedisplay.' '.get_theme_mod('text_copyright', get_bloginfo('name'));
-				if ($creditdisplay=="1") {echo '<br/>Branding &amp; Web Development by <a title="Trivision Creative" href="http://trivisioncreative.com/" target="_blank">TriVision Creative</a>';} else {echo '. All Rights Reserved.';}
+				if ($creditdisplay=="1") {echo '<br/><span class="copyright-branding">Branding &amp; Web Development by <a title="Trivision Creative" href="http://trivisioncreative.com/" target="_blank">TriVision Creative</a></span>';} else {echo '. All Rights Reserved.';}
 				
 				?>
 				</div>
