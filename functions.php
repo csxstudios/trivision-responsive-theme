@@ -29,6 +29,7 @@ function theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'theme_scripts', 0 );
 
 function register_navmenus() {
+	global $trivision_theme_name;
 	register_nav_menus( array(
 		'primary'   => __('Primary Nav', $trivision_theme_name),
 		'topnav'   => __('Top Nav', $trivision_theme_name),
@@ -102,6 +103,7 @@ add_action( 'tgmpa_register', 'trivision_theme_register_required_plugins' );
  * TGM_Plugin_Activation class constructor.
  */
 function trivision_theme_register_required_plugins() {
+	global $trivision_theme_name;
 
     /*
      * Array of plugin arrays. Required keys are name and slug.

@@ -22,6 +22,7 @@
 	</style>
 	<?php } ?>
 	<?php 
+	global $trivision_theme_name;
 	//Theme Customizer
 	$fonttest = get_theme_mod( 'font_setting' );
 	if($fonttest) {$fontcss = preg_replace('/\s+/', '+', $fonttest);$fontfam = $fonttest;} else {$fontcss="Open+Sans";$fontfam = "Open Sans";}
@@ -33,6 +34,9 @@
 	$statusbadgetest  = get_theme_mod( 'option_badge' );
 	$statusslug  = get_theme_mod( 'text_status_slug' );
 	if($statusbadgetest) {$statusbadge = $statusbadgetest;} else {$statusbadge = "0";}
+	$menuwidthtest  = get_theme_mod( 'menu_width' );
+	if($menuwidthtest) {$menuwidth = $menuwidthtest;} else {$menuwidth = "container";}
+	$topnavtest  = get_theme_mod( 'topnav_display' );
 	
 	//Accent Colors
 	$accenttest = get_theme_mod( 'color_accent' );
@@ -59,6 +63,7 @@
 	if($opacitytest2) {$opacityval2 = $opacitytest2;} else {$opacityval2 = "0.9";}
 	if (!$accenttest) {$accenttest = "#FAB702";}
 	if ($headertest == 'above') {$headerpos = "158px";} else {$headerpos = "0px";}
+	if($topnavtest == "off") { $headerpos = "120px"; }
 	$menudropdowntest = hex2rgb($copyrightbg);
 	$menudropdownbg = implode(", ", $menudropdowntest);
 	$menudropdownhovertest = hex2rgb($accenttest);
@@ -140,8 +145,8 @@
 			);
 		?>
 		<div id="page">
-			<div id="header" class="navbar-fixed-top">
-				<div id="top-menu">
+			<div id="header" class="navbar-fixed-top <?php if($topnavtest == "off") { echo ' header-scroll'; } ?>">
+				<div id="top-menu"<?php if($topnavtest == "off") { echo ' style="display:none;"'; } ?>>
 				<div class="container">
 					<div class="pull-left"></div>
 					<div class="pull-right">
@@ -200,6 +205,7 @@
 						<?php 
 						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'linkedin', 'envelope');
 						foreach ($social_array as $social) {
+							global $social_test;
 							$social_acct = 'text_'.$social;
 							$social_link = get_theme_mod( $social_acct );
 							$social_target = '_blank';
@@ -265,7 +271,7 @@
 				</div>
 				</div>
 				<div id="main-header">
-					<div class="container">
+					<div class="<?php echo $menuwidth; ?>">
 						<?php //echo get_theme_mod( 'logo_main' ); ?>
 						<div class="pull-left"><a href="<?php bloginfo('url');?>"><img src="<?php $logotest = get_theme_mod( 'logo_main' ); if ($logotest) { echo $logotest; } else { echo bloginfo('template_directory').'/images/logo-tagline.svg'; } ?>" class="svg-logo<?php if ($inverttest == 'knockout') { echo ' svg';} ?>" /></a>
 						<?php if (get_theme_mod( 'text_phone' )) {?>
@@ -275,6 +281,7 @@
 						<?php } ?>
 						</div>
 						<?php
+						if($topnavtest != "off") {
 							wp_nav_menu( array(
 								'menu'              => 'primary',
 								'theme_location'    => $trivision_theme_name,
@@ -286,8 +293,9 @@
 								'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
 								'walker'            => new wp_bootstrap_navwalker())
 							);
+						}
 						?>						
-						<div class="pull-right hidden-lg">
+						<div class="pull-right <?php if($topnavtest != "off") { echo ' hidden-lg'; } ?>">
 							<a id="simple-menu" href="#sidr">
 							<i class="fa fa-bars fa-2x"></i>
 							</a>

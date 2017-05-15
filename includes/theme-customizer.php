@@ -34,7 +34,7 @@ class theme_customizer
 		$themelogoscroll = $themedir.'/images/trivision-logo-scroll.png';
 		$themelogofavicon = $themedir.'/favicon.png';
 		$themesearch = $themedir.'/images/heading-about.jpg';
-		$themesearch = $themedir.'/images/heading-about.jpg';
+		$themelogofooter = $themedir.'/images/logo-footer-bug.png';
 
         $wp_manager->add_section( 'customiser_demo_section', array(
             'title'          => 'TriVision Theme Controls',
@@ -257,6 +257,34 @@ class theme_customizer
             'section' => 'customiser_demo_section',
             'type'    => 'select',
             'choices' => array("left" => "Left", "center" => "Center", "right" => "Right"),
+            'priority' => 7,
+			'description' => ''
+        ) );
+		
+		// Select control
+        $wp_manager->add_setting( 'menu_width', array(
+            'default'        => 'container',
+        ) );
+
+        $wp_manager->add_control( 'menu_width', array(
+            'label'   => 'Menu Container/Full-Width',
+            'section' => 'customiser_demo_section',
+            'type'    => 'select',
+            'choices' => array("container" => "Container", "container-fluid" => "Full-Width"),
+            'priority' => 7,
+			'description' => ''
+        ) );
+		
+		// Select control
+        $wp_manager->add_setting( 'topnav_display', array(
+            'default'        => "On",
+        ) );
+
+        $wp_manager->add_control( 'topnav_display', array(
+            'label'   => 'Display Top Nav',
+            'section' => 'customiser_demo_section',
+            'type'    => 'select',
+            'choices' => array("on" => "On", "off" => "Off"),
             'priority' => 7,
 			'description' => ''
         ) );

@@ -45,16 +45,6 @@ jQuery(document).ready(function($){
 	
 	new WOW().init();
 	
-	//sidr responsive menu
-	$('#simple-menu').sidr();
-	$( "#page" ).click(function() {
-	  jQuery.sidr('close');
-	});
-	
-	$('#sidr #menu-primary .menu-item-has-children > a').click(function(e) {
-        e.preventDefault();
-        $(this).next().slideToggle();
-    });
 	
 	/* Replace all SVG images with inline SVG */
 	jQuery('img.svg').each(function(){

@@ -119,10 +119,15 @@
 	</div>
 	<?php } ?>
 	</footer>
-	<?php wp_footer(); ?>	
+	<?php wp_footer(); ?>
+	<?php 
+	$topnavtest  = get_theme_mod( 'topnav_display' );
+	if($topnavtest != "off") { ?>
 	<script>
 	//<![CDATA[
 	jQuery(document).ready(function () {
+		//sidr menu
+		$('#simple-menu').sidr();
 		//show fixed navbar
 		//var st_pos = jQuery("#page").scrollTop();
 		//console.log(st_pos);
@@ -142,5 +147,25 @@
 		
 	});//]]>  
 	</script>
+	<?php } else { ?>
+	<script>
+	//<![CDATA[
+	jQuery(document).ready(function ($) {
+		//sidr responsive menu
+		$('#simple-menu').sidr({
+		  //name: 'sidr-right',
+		  //side: 'right'
+		});
+		$( "#page" ).click(function() {
+		  $('#simple-menu').sidr('close');
+		});
+		
+		$('#sidr #menu-primary .menu-item-has-children > a').click(function(e) {
+			e.preventDefault();
+			$(this).next().slideToggle();
+		});
+	});//]]>  
+	</script>
+	<?php } ?>
 	</body>
 </html>
