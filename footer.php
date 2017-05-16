@@ -164,6 +164,19 @@
 			e.preventDefault();
 			$(this).next().slideToggle();
 		});
+		
+		var $grid = $('.grid').isotope({
+		  // set itemSelector so .grid-sizer is not used in layout
+		  itemSelector: '.grid-item',
+		  initLayout: false,
+		  percentPosition: true,
+		  masonry: {
+			// use element for option
+			columnWidth: '.grid-sizer'
+		  }
+		});
+		$('#grid').fadeTo('slow',1);
+		$grid.isotope({ filter: '*' });	
 	});//]]>  
 	</script>
 	<?php } ?>
