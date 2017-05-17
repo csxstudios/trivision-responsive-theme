@@ -125,7 +125,7 @@
 	if($topnavtest != "off") { ?>
 	<script>
 	//<![CDATA[
-	jQuery(document).ready(function () {
+	jQuery(document).ready(function ($) {
 		//sidr menu
 		$('#simple-menu').sidr();
 		//show fixed navbar
