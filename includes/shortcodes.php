@@ -1,4 +1,5 @@
 <?php 
+$carouselcount = 0;
 // Portfolio Gallery - Landing Page
 add_shortcode('folio_gallery', 'folio_gallery_func');
 function folio_gallery_func($atts, $content = null){
@@ -414,7 +415,10 @@ function custom_loop_func($atts, $content = null){
 		'wpcftext'   => 	'',
 		'custlayout'   => 	'',
 	), $atts));
-
+	
+	global $carouselcount;
+	$carouselcount++;
+	$bigarrows = 0;
 	$posttype = (!empty($type) ? $type : '');
 	$postcat = (!empty($cat) ? $cat : '');
 	$maxposts = (!empty($num) ? $num : '-1');
@@ -429,22 +433,31 @@ function custom_loop_func($atts, $content = null){
 	ob_start(); ?>		
 	    <section class="custom-loop flex-top wpb_row text-center">		
 		<?php 
-		if ($postdisplay == "carousel") {			
+		if ($postdisplay == "carousel") {
 			$output = '<div class="carousel-controls text-right">';
-			$output.= '<a class="carousel-left" href="#myCarousel" role="button" data-slide="prev">';
+			$output.= '<a class="carousel-left" href="#myCarousel'.$carouselcount.'" role="button" data-slide="prev">';
 			$output.= '<span class="fa fa-angle-left" aria-hidden="true"></span>';
 			$output.= '<span class="sr-only">Previous</span>';
 			$output.= '</a>';
-			$output.= '<a class="carousel-right" href="#myCarousel" role="button" data-slide="next">';
+			$output.= '<a class="carousel-right" href="#myCarousel'.$carouselcount.'" role="button" data-slide="next">';
 			$output.= '<span class="fa fa-angle-right" aria-hidden="true"></span>';
 			$output.= '<span class="sr-only">Next</span>';
 			$output.= '</a>';
 			$output.= '</div>';
-			$output.= '<div id="myCarousel" class="carousel slide" data-ride="carousel">';
+			$output.= '<div id="myCarousel'.$carouselcount.'" class="carousel slide" data-ride="carousel">';
 			$output.= '<div class="carousel-inner" role="listbox">';
 			$output.= '<div class="item active">';
 			$output.= '<div class="row">';
 			echo $output;
+		}
+		if ($postdisplay == "carousel2") {
+			$output = '<div id="myCarousel'.$carouselcount.'" class="carousel slide" data-ride="carousel">';
+			$output.= '<div class="carousel-inner" role="listbox">';
+			$output.= '<div class="item active">';
+			$output.= '<div class="row">';
+			echo $output;
+			$postdisplay = 'carousel';
+			$bigarrows = 1;
 		}
 		if ($maxposts < 0) {
 			$args2 = array(
@@ -481,7 +494,7 @@ function custom_loop_func($atts, $content = null){
 		$count = $custom_query->post_count;
 		while ($custom_query -> have_posts()) : $custom_query -> the_post();
 		$counter++;
-		if ($counter % 3 == 0) {$row = 1;} else {$row = 0;}
+		if ($counter % $columns == 0) {$row = 1;} else {$row = 0;}
 		if ($counter == $count) {$row = 0;}
 		//$format = get_post_format($post->ID);	
 		//$link_video = get_post_meta(get_the_ID(),'_cmb_link_video', true);
@@ -553,14 +566,26 @@ function custom_loop_func($atts, $content = null){
 		if ($postdisplay == 'carousel' AND $row == 1) {echo '</div></div><div class="item"><div class="row">';}
 		endwhile;
 		
-		if ($postdisplay == "carousel") {
+		if ($postdisplay == "carousel" AND $bigarrows == 0) {
 			$output = '</div>';
 			$output.= '</div>';
 			$output.= '</div>';
 
 			$output.= '</div>';
 			echo $output;
-		} ?>
+		} 
+		if ($postdisplay == "carousel" AND $bigarrows == 1) {
+			$output = '</div>';			
+			$output.= '</div>';
+			$output.= '</div>';
+			
+			$output.= '<a class="left carousel-control" href="#myCarousel'.$carouselcount.'" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a>';
+			$output.= '<a class="right carousel-control" href="#myCarousel'.$carouselcount.'" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>';
+			$output.= '</div>';
+			echo $output;
+		}
+		
+		?>
 		</section>
 		<?php if ($maxposts > 0 AND $postdisplay != 'carousel') { echo '
 		<div id="page-links" class="text-center">
@@ -725,6 +750,7 @@ if(function_exists('vc_map')){
 					 __('Columns', $trivision_theme_name) => "cols",
 					 __('Modals', $trivision_theme_name) => "modals",
 					 __('Carousel', $trivision_theme_name) => "carousel",
+					 __('Carousel Big Arrows', $trivision_theme_name) => "carousel2",
 					 __('Magazine Columns', $trivision_theme_name) => "magazine",
                     ),
          "description" => __("Layout display.", $trivision_theme_name)
