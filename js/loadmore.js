@@ -45,6 +45,12 @@ jQuery(document).ready(function($){
 	
 	new WOW().init();
 	
+	$( "#page" ).click(function() {
+	  jQuery.sidr('close');
+	});
+	$( "#menu-item-326" ).click(function() {
+	  jQuery.sidr('close');
+	});
 	
 	/* Replace all SVG images with inline SVG */
 	jQuery('img.svg').each(function(){
