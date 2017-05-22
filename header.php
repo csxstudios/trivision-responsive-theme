@@ -75,6 +75,7 @@
 	html, body {color:#7b7c7c;font-family: '<?php echo $fontfam; ?>', sans-serif;}
 	#sidr {display:none;}
 	.sidr.left {display:block!important;}
+	.fa-simple {padding:44px 0;color:#fff!important;padding-right:15px;}
 	.headline-font h3, #body h3, #body-home h3, #body-home h4, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: 'Montserrat',Arial, Helvetica, sans-serif;text-transform:uppercase;}
 	#footer h2:before, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, #primary-nav .current-menu-item .dropdown-menu > a {background-color:rgba(<?php echo $menudropdownhoverbg; ?>, .8)!important;}
 	#main-header svg:hover .st99 {fill:<?php echo $accenttest; ?>;}
@@ -296,6 +297,7 @@
 						}
 						?>						
 						<div class="pull-right <?php if($topnavtest != "off") { echo ' hidden-lg'; } ?>">
+							<a href="#"><i class="fa fa-search fa-2x fa-simple" aria-hidden="true"></i></a>
 							<a id="simple-menu" href="#sidr">
 							<i class="fa fa-bars fa-2x"></i>
 							</a>
