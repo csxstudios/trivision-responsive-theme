@@ -10,6 +10,12 @@
 			echo '<div class="pad-30"></div></div>';
 			} ?>				
 			<div id="footer">
+				<?php
+				$pagesitemap = get_page_by_title( 'Sitemap' );
+				if ($pagesitemap) { 
+					echo '<div class="custom-footer">';
+					echo apply_filters('the_content', $pagesitemap->post_content); 					
+				} else { ?>
 				<div class="container">
 				<div class="row">
 					<div class="col-md-4">
@@ -45,7 +51,7 @@
 					</ul>
 					</div>
 				</div>
-				<?php
+				<?php }
 				$copydivtest = get_theme_mod( 'copyright_div' );
 				if($copydivtest == 'combined') {
 				?>
@@ -151,14 +157,15 @@
 	<script>
 	//<![CDATA[
 	jQuery(document).ready(function ($) {
+		$( "body" ).click(function() {
+		  $('#simple-menu').sidr('close');
+		});
 		//sidr responsive menu
 		$('#simple-menu').sidr({
 		  //name: 'sidr-right',
 		  //side: 'right'
 		});
-		$( "#page" ).click(function() {
-		  $('#simple-menu').sidr('close');
-		});
+		
 		
 		$('#sidr #menu-primary .menu-item-has-children > a').click(function(e) {
 			e.preventDefault();
