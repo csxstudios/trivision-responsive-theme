@@ -124,6 +124,25 @@
 		</div>
 	</div>
 	<?php } ?>
+	
+					<div class="modal fade in" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+							<h2 class="modal-title text-center" id="myModalLabel">Search</h2>
+						  </div>
+						  <div class="modal-body">
+							<div class="search">
+							<form method="get" id="searchform" action="<?php bloginfo('url');?>">
+								<input type="text" name="s" id="s" placeholder="" class="searchBox" value="">
+								<input type="submit" name="" value="" class="btnSubmit" title="Begin Search">
+							</form>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
 	</footer>
 	<?php wp_footer(); ?>
 	<?php 
