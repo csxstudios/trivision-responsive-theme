@@ -222,24 +222,6 @@
 						<li class="hidden-sm"><a target="_blank" href="https://www.instagram.com/"><i class="fa fa-instagram fa-lg"></i></a></li>
 						<?php } ?>
 					</ul>
-					<div class="modal fade in" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-					  <div class="modal-dialog">
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-							<h2 class="modal-title text-center" id="myModalLabel">Search</h2>
-						  </div>
-						  <div class="modal-body">
-							<div class="search">
-							<form method="get" id="searchform" action="<?php bloginfo('url');?>">
-								<input type="text" name="s" id="s" placeholder="" class="searchBox" value="">
-								<input type="submit" name="" value="" class="btnSubmit" title="Begin Search">
-							</form>
-							</div>
-						  </div>
-						</div>
-					  </div>
-					</div>
 					<?php if ($statusslug) { ?>
 					<div class="modal fade in" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 					  <div class="modal-dialog">
@@ -297,7 +279,7 @@
 						}
 						?>						
 						<div class="pull-right <?php if($topnavtest != "off") { echo ' hidden-lg'; } ?>">
-							<a href="#"><i class="fa fa-search fa-2x fa-simple" aria-hidden="true"></i></a>
+							<a href="#" data-toggle="modal" data-target="#search"><i class="fa fa-search fa-2x fa-simple" aria-hidden="true"></i></a>
 							<a id="simple-menu" href="#sidr">
 							<i class="fa fa-bars fa-2x"></i>
 							</a>
