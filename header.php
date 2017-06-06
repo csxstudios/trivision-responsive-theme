@@ -63,7 +63,7 @@
 	if($opacitytest2) {$opacityval2 = $opacitytest2;} else {$opacityval2 = "0.9";}
 	if (!$accenttest) {$accenttest = "#FAB702";}
 	if ($headertest == 'above') {$headerpos = "158px";} else {$headerpos = "0px";}
-	if($topnavtest == "off") { $headerpos = "120px"; }
+	if($topnavtest == "off" || $topnavtest == "menu") { $headerpos = "120px"; }
 	$menudropdowntest = hex2rgb($copyrightbg);
 	$menudropdownbg = implode(", ", $menudropdowntest);
 	$menudropdownhovertest = hex2rgb($accenttest);
@@ -146,8 +146,8 @@
 			);
 		?>
 		<div id="page">
-			<div id="header" class="navbar-fixed-top <?php if($topnavtest == "off") { echo ' header-scroll'; } ?>">
-				<div id="top-menu"<?php if($topnavtest == "off") { echo ' style="display:none;"'; } ?>>
+			<div id="header" class="navbar-fixed-top <?php if($topnavtest == "off" || $topnavtest == "menu") { echo ' header-scroll'; } ?>">
+				<div id="top-menu"<?php if($topnavtest == "off" || $topnavtest == "menu") { echo ' style="display:none;"'; } ?>>
 				<div class="container">
 					<div class="pull-left"></div>
 					<div class="pull-right">

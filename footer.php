@@ -147,7 +147,7 @@
 	<?php wp_footer(); ?>
 	<?php 
 	$topnavtest  = get_theme_mod( 'topnav_display' );
-	if($topnavtest != "off") { ?>
+	if($topnavtest == "on") { ?>
 	<script>
 	//<![CDATA[
 	jQuery(document).ready(function ($) {
@@ -185,6 +185,8 @@
 		  //side: 'right'
 		});
 		
+		$('.menu-item-search').find('a').attr('data-toggle', 'modal');
+		$('.menu-item-search').find('a').attr('data-target', '#search');
 		
 		$('#sidr #menu-primary .menu-item-has-children > a').click(function(e) {
 			e.preventDefault();

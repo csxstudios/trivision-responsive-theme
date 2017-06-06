@@ -284,7 +284,7 @@ class theme_customizer
             'label'   => 'Display Top Nav',
             'section' => 'customiser_demo_section',
             'type'    => 'select',
-            'choices' => array("on" => "On", "off" => "Off"),
+            'choices' => array("on" => "On", "off" => "Off (hamburger menu)", "menu" => "Off"),
             'priority' => 7,
 			'description' => ''
         ) );
