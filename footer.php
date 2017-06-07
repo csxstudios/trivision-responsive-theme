@@ -11,6 +11,9 @@
 			} ?>				
 			<div id="footer">
 				<?php
+				$footercolstest = get_theme_mod( 'footer_columns' );
+				if($footercolstest) {$footercols = 12/$footercolstest;} else {$footercols = 4;$footercolstest = 3;}
+				if($footercolstest == 5) {$footercols = 15;}
 				$pagesitemap = get_page_by_title( 'Sitemap' );
 				if ($pagesitemap) { 
 					echo '<div class="custom-footer">';
@@ -18,22 +21,16 @@
 				} else { ?>
 				<div class="container">
 				<div class="row">
-					<div class="col-md-4">
-					<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Widget Col-1')) : ?>
+				<?php
+				for($i=1; $i<=$footercolstest; $i++) { 
+					$footerwidget = 'Footer Widget Col-'.$i;
+				?>
+					<div id="footer-col-<?php echo $i; ?>" class="col-md-<?php echo $footercols; ?>">
+					<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar($footerwidget)) : ?>
 					<!-- no dynamic sidebar -->			
 					<?php endif; ?>
-					</div>
-					<div id="quick-links" class="col-md-4">
-					<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Widget Col-2')) : ?>
-					<!-- no dynamic sidebar -->			
-					<?php endif; ?>
-					</div>
-					<div class="col-md-4">
-					<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Widget Col-3')) : ?>
-					<!-- no dynamic sidebar -->			
-					<?php endif; ?>
-					<ul class="social-list">
-						<?php 
+					<?php if($i == $footercolstest) { 
+						echo '<ul class="social-list">';
 						$social_array = array('facebook', 'twitter', 'youtube', 'yelp', 'google', 'pinterest', 'instagram', 'linkedin', 'envelope');
 						foreach ($social_array as $social) {
 							$social_acct = 'text_'.$social;
@@ -43,13 +40,10 @@
 							if ($social_link) {echo '<li class="hidden-sm hidden-xs"><a target="'.$social_target.'" href="'.$social_link.'"><i class="fa fa-'.$social.' fa-lg"></i></a></li>';}
 							$social_test .= $social_link;
 						}
-						if (!$social_test) { ?>
-						<li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook fa-lg"></i></a></li>
-						<li><a target="_blank" href="https://www.pinterest.com/"><i class="fa fa-pinterest fa-lg"></i></a></li>
-						<li><a target="_blank" href="https://www.instagram.com/"><i class="fa fa-instagram fa-lg"></i></a></li>
-						<?php } ?>						
-					</ul>
+						echo '</ul>';
+					} ?>
 					</div>
+				<?php } ?>
 				</div>
 				<?php }
 				$copydivtest = get_theme_mod( 'copyright_div' );
