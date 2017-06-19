@@ -277,7 +277,7 @@ class theme_customizer
 		
 		// Select control
         $wp_manager->add_setting( 'topnav_display', array(
-            'default'        => "On",
+            'default'        => "on",
         ) );
 
         $wp_manager->add_control( 'topnav_display', array(
