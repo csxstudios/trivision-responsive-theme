@@ -93,6 +93,19 @@ class theme_customizer
 			'description' => ''
         ) ) );
 		
+		// WP_Customize_Image_Control
+        $wp_manager->add_setting( 'bg_pattern', array(
+            'default'        => '',
+        ) );
+
+        $wp_manager->add_control( new WP_Customize_Image_Control( $wp_manager, 'bg_pattern', array(
+            'label'   => 'Background Pattern',
+            'section' => 'customiser_demo_section',
+            'settings'   => 'bg_pattern',
+            'priority' => 3,
+			'description' => 'Optional background pattern for centered logo layout under Top Nav Display.'
+        ) ) );
+		
 		// Select control
         $wp_manager->add_setting( 'font_setting', array(
             'default'        => 'Open Sans',
@@ -100,6 +113,20 @@ class theme_customizer
 
         $wp_manager->add_control( 'font_setting', array(
             'label'   => 'Select Font',
+            'section' => 'customiser_demo_section',
+            'type'    => 'select',
+            'choices' => array("Titillium Web" => "Titillium Web", "Open Sans" => "Open Sans", "Lato" => "Lato", "Montserrat" => "Montserrat", "PT Sans" => "PT Sans"),
+            'priority' => 4,
+			'description' => ''
+        ) );
+		
+		// Select control
+        $wp_manager->add_setting( 'font_setting2', array(
+            'default'        => 'Montserrat',
+        ) );
+
+        $wp_manager->add_control( 'font_setting2', array(
+            'label'   => 'Select Headline/Secondary Font',
             'section' => 'customiser_demo_section',
             'type'    => 'select',
             'choices' => array("Titillium Web" => "Titillium Web", "Open Sans" => "Open Sans", "Lato" => "Lato", "Montserrat" => "Montserrat", "PT Sans" => "PT Sans"),
@@ -270,7 +297,7 @@ class theme_customizer
             'label'   => 'Menu Container/Full-Width',
             'section' => 'customiser_demo_section',
             'type'    => 'select',
-            'choices' => array("container" => "Container", "container-fluid" => "Full-Width"),
+            'choices' => array("container" => "Container", "container-fluid" => "Full-Width", "container-full" => "Full-Width (no padding)"),
             'priority' => 7,
 			'description' => ''
         ) );
@@ -284,7 +311,7 @@ class theme_customizer
             'label'   => 'Display Top Nav',
             'section' => 'customiser_demo_section',
             'type'    => 'select',
-            'choices' => array("on" => "On", "off" => "Off (hamburger menu)", "menu" => "Off"),
+            'choices' => array("on" => "On", "off" => "Off (hamburger menu)", "menu" => "Off", "centered" => "Centered"),
             'priority' => 7,
 			'description' => ''
         ) );

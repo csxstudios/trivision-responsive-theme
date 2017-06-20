@@ -26,6 +26,8 @@
 	//Theme Customizer
 	$fonttest = get_theme_mod( 'font_setting' );
 	if($fonttest) {$fontcss = preg_replace('/\s+/', '+', $fonttest);$fontfam = $fonttest;} else {$fontcss="Open+Sans";$fontfam = "Open Sans";}
+	$fonttest2 = get_theme_mod( 'font_setting2' );
+	if($fonttest2) {$fontcss2 = preg_replace('/\s+/', '+', $fonttest2);$fontfam2 = $fonttest2;} else {$fontcss2="Montserrat";$fontfam2 = "Montserrat";}
 	$titletest = get_theme_mod( 'title_align' );
 	if($titletest) {$titlealign = $titletest;} else {$titlealign = "left";}
 	$searchtest  = get_theme_mod( 'search_image' );
@@ -41,6 +43,7 @@
 	//Accent Colors
 	$accenttest = get_theme_mod( 'color_accent' );
 	$footertest = get_theme_mod( 'color_footer' );
+	$patterntest = get_theme_mod( 'bg_pattern' );
 	$copyrighttest = get_theme_mod( 'color_copyright' );
 	$watermarktest = get_theme_mod( 'logo_footer' );
 	$menutest  = get_theme_mod( 'color_menu' );
@@ -56,6 +59,7 @@
 	$inverttest  = get_theme_mod( 'invert_setting' );
 	
 	if($footertest) {$footerbg = $footertest;} else {$footerbg = "#2e2e2e";}
+	if($patterntest) {$patternbg = $patterntest;}
 	if($symboltest) {$symbol = $symboltest;} else {$symbol = "circle";}
 	if($copyrighttest) {$copyrightbg = $copyrighttest;} else {$copyrightbg = "#262626";}
 	if($preloadertest) {$preloaderbg = $preloadertest;} else {$preloaderbg = "#000000";}
@@ -64,6 +68,7 @@
 	if (!$accenttest) {$accenttest = "#FAB702";}
 	if ($headertest == 'above') {$headerpos = "158px";} else {$headerpos = "0px";}
 	if($topnavtest == "off" || $topnavtest == "menu") { $headerpos = "120px"; }
+	if($topnavtest == "centered") { $headerpos = "210px"; }
 	$menudropdowntest = hex2rgb($copyrightbg);
 	$menudropdownbg = implode(", ", $menudropdowntest);
 	$menudropdownhovertest = hex2rgb($accenttest);
@@ -71,12 +76,12 @@
 	?>
 	<style id="customizer" type="text/css">
 	@import url('https://fonts.googleapis.com/css?family=<?php echo $fontcss; ?>:300,400,600,700,800');
-	@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800');
+	@import url('https://fonts.googleapis.com/css?family=<?php echo $fontcss2; ?>:400,500,600,700,800');
 	html, body {color:#7b7c7c;font-family: '<?php echo $fontfam; ?>', sans-serif;}
 	#sidr {display:none;}
 	.sidr.left {display:block!important;}
 	.fa-simple {padding:44px 0;color:#fff!important;padding-right:15px;}
-	.headline-font h3, #body h3, #body-home h3, #body-home h4, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: 'Montserrat',Arial, Helvetica, sans-serif;text-transform:uppercase;}
+	.headline-font h3, #body h3, #body-home h3, #body-home h4, #body h4, .sidr, #cta-contact h3, .modal h3  {font-family: '<?php echo $fontfam2; ?>',Arial, Helvetica, sans-serif;}
 	#footer h2:before, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, #primary-nav .current-menu-item .dropdown-menu > a {background-color:rgba(<?php echo $menudropdownhoverbg; ?>, .8)!important;}
 	#main-header svg:hover .st99 {fill:<?php echo $accenttest; ?>;}
 	#body a:hover, #body-home a:hover, .sidr .current-menu-item > a, figure:hover figcaption {color:<?php echo $accenttest; ?>;}
@@ -87,9 +92,15 @@
 	#footer-bottom {background-color: rgba(<?php echo $menudropdownbg; ?>, 1)!important;}	
 	#header {background-color: rgba(<?php if ($headertest == 'above') { echo '255,255,255,.85';} else {echo $menudropdownbg.', '.$opacityval2;} ?>);}
 	.header-scroll {background-color: rgba(<?php echo $menubg; ?>, <?php echo $opacityval2; ?>)!important;}	
+	.header-scroll .nav-centered {float:right;background-color:transparent!important;}
 	#body-home, #body-page {padding-top:<?php echo $headerpos; ?>;}
 	#preloader {background-color:<?php echo $preloaderbg; ?>;}
 	.sidr{background-color:<?php echo $copyrightbg; ?>;}
+	.dropdown-submenu > a:after {
+	content: '\f105';
+    font-family: 'FontAwesome';
+    float: right;
+	}
 	#main-header .nav > li > a:after {content: '<?php
 	switch ($symbol) {
     case "circle":
@@ -120,6 +131,13 @@
 	.btn-outline {color: <?php echo $accenttest; ?>!important;background-color: rgba(255, 255, 255, 0);border-color: <?php echo $accenttest; ?>;}
 	<?php if ($footerdark) { ?>
 	#footer h3 {color: #fff;}
+	<?php } ?>
+	<?php if ($patterntest) { ?>
+	.logo-centered {background: url(<?php echo $patternbg; ?>) repeat;}
+	.header-scroll .logo-centered {background:none;}
+	.nav > li:hover > a {background-color:<?php echo $copyrightbg; ?>!important;}
+	#main-header .nav > li > a:hover {color:#fff!important;}
+	.nav-centered .nav > li:last-child > a {padding-right:20px;}
 	<?php } ?>
 	</style>
 	</head>
@@ -256,7 +274,7 @@
 				<div id="main-header">
 					<div class="<?php echo $menuwidth; ?>">
 						<?php //echo get_theme_mod( 'logo_main' ); ?>
-						<div class="pull-left"><a href="<?php bloginfo('url');?>"><img src="<?php $logotest = get_theme_mod( 'logo_main' ); if ($logotest) { echo $logotest; } else { echo bloginfo('template_directory').'/images/logo-tagline.svg'; } ?>" class="svg-logo<?php if ($inverttest == 'knockout') { echo ' svg';} ?>" /></a>
+						<div class="<?php if($topnavtest = "centered"){echo 'logo-centered';} else{echo 'pull-left';} ?>"><a href="<?php bloginfo('url');?>"><img src="<?php $logotest = get_theme_mod( 'logo_main' ); if ($logotest) { echo $logotest; } else { echo bloginfo('template_directory').'/images/logo-tagline.svg'; } ?>" class="svg-logo<?php if ($inverttest == 'knockout') { echo ' svg';} ?>" /></a>
 						<?php if (get_theme_mod( 'text_phone' )) {?>
 						<div class="sticky-tel hidden-lg hidden-md hidden-sm hidden-xs">
 						<a href="tel:+17037133332"><h3><?php echo get_theme_mod( 'text_phone' ); ?></h3></a>
@@ -264,13 +282,14 @@
 						<?php } ?>
 						</div>
 						<?php
+						if($topnavtest = "centered"){$navalign = 'nav-centered header-scroll';} else{$navalign = 'pull-right';}
 						if($topnavtest != "off") {
 							wp_nav_menu( array(
 								'menu'              => 'primary',
 								'theme_location'    => $trivision_theme_name,
 								'depth'             => 0,
 								'container'         => 'div',
-								'container_class'   => 'collapse navbar-collapse pull-right',
+								'container_class'   => 'collapse navbar-collapse '.$navalign,
 								'container_id'      => 'primary-nav',
 								'menu_class'        => 'nav navbar-nav',
 								'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',

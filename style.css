@@ -6,6 +6,12 @@ Author URI: http://www.trivisioncreative.com
 Description: Custom theme created by TriVision.
 Version: 2.0
 */
+.nav-centered {text-align: center;}
+.nav-centered > ul {display: inline-block;}
+.nav-centered > .nav > li > a {padding: 20px;}
+.logo-centered {text-align:center;padding:15px 0;}
+.header-scroll .logo-centered {float:left;padding:0 15px;}
+.header-scroll .nav-centered > .nav > li > a {padding: 46px 20px;}
 figcaption {
 font-size: 90%;
 text-transform: uppercase;
@@ -474,6 +480,9 @@ a.img-icon-zoom {background: url(images/icon-zoom.png) center no-repeat;}
 }
 @media (min-width: 992px) {
 .ig_message p {font-size:1em!important;}
+}
+@media only screen and (max-width: 1199px) {
+.logo-centered {float:left;}
 }
 @media only screen and (max-width: 991px) {
 .pf_full_width .item{float:left;width:49.9% !important;}
