@@ -404,6 +404,7 @@ function custom_loop_func($atts, $content = null){
 		'type'		=> 	'',
 		'cat'		=> 	'',
 		'num'		=> 	'',
+		'pagination'		=> 	'',
 		'customclass'		=> 	'',
 		'columns'   => 	'',
 		'sort'   => 	'',
@@ -422,6 +423,7 @@ function custom_loop_func($atts, $content = null){
 	$posttype = (!empty($type) ? $type : '');
 	$postcat = (!empty($cat) ? $cat : '');
 	$maxposts = (!empty($num) ? $num : '-1');
+	$pagination = (!empty($pagination) ? $pagination : 'on');
 	$postdisplay = (!empty($display) ? $display : 'li');
 	$modallayout = (!empty($custlayout) ? $custlayout : '218');
 	$column_math = 12 / $columns;
@@ -492,6 +494,7 @@ function custom_loop_func($atts, $content = null){
 		$counter = 0;
 		if ($metasort) {$custom_query = new WP_Query($args3);} else {$custom_query = new WP_Query($args2);}
 		$count = $custom_query->post_count;
+		//echo $count;
 		while ($custom_query -> have_posts()) : $custom_query -> the_post();
 		$counter++;
 		if ($counter % $columns == 0) {$row = 1;} else {$row = 0;}
@@ -508,14 +511,16 @@ function custom_loop_func($atts, $content = null){
 		if(!$custlink) {$link = get_page_link();} else {$link = $custlink;}
 		if($custcolor) {$custstyle = ' style="background-color:'.$custcolor.';"';}
 		$pid = get_the_ID();
-		if (!$postimg) {
-			$attachments = get_children(array('post_parent' => get_the_ID(), 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order'));
-			if ( ! is_array($attachments) ) continue;
-			//$count = count($attachments);
-			$first_attachment = array_shift($attachments);
-			$postimg = wp_get_attachment_image_src($first_attachment->ID, 'large');
-			if ( ! is_array($postimg) ) continue;
-			$postimg = $postimg[0];
+		if(is_page($pid)) {
+			if (!$postimg) {			
+				$attachments = get_children(array('post_parent' => get_the_ID(), 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order'));
+				if ( ! is_array($attachments) ) continue;
+				//$count = count($attachments);
+				$first_attachment = array_shift($attachments);
+				$postimg = wp_get_attachment_image_src($first_attachment->ID, 'large');
+				if ( ! is_array($postimg) ) continue;
+				$postimg = $postimg[0];
+			}
 		}
 		if(!$postimg) {$postimg = get_template_directory_uri().'/images/news-placeholder.jpg';}
 		if ($custthumb) {$postimg = $custthumb;}
@@ -587,7 +592,7 @@ function custom_loop_func($atts, $content = null){
 		
 		?>
 		</section>
-		<?php if ($maxposts > 0 AND $postdisplay != 'carousel') { echo '
+		<?php if ($maxposts > 0 AND $postdisplay != 'carousel' AND $pagination == 'on') { echo '
 		<div id="page-links" class="text-center">
 			<a class="first page button" href="'.get_pagenum_link(1).'">&laquo;</a>
 			<a class="previous page button" href="'.get_pagenum_link(($curpage-1 > 0 ? $curpage-1 : 1)).'">&lsaquo;</a>';
@@ -693,6 +698,19 @@ if(function_exists('vc_map')){
          "description" => __("Max. # of posts. Leave empty to show all posts.", $trivision_theme_name )
       ),
 	  array(
+         "type" => "dropdown",
+         "holder" => "",
+         "class" => "",
+         "heading" => __("Paging", $trivision_theme_name),
+         "param_name" => "pagination",
+		 "admin_label"=>true,
+         "value" => array(   
+                     __('On', $trivision_theme_name) => "on",
+					 __('Off', $trivision_theme_name) => "off",                     
+                    ),
+         "description" => __("Show paging buttons if maximum posts is set. Default is on.", $trivision_theme_name)
+      ),
+	  array(
          "type" => "textfield",
          "holder" => "",
          "class" => "",
@@ -712,6 +730,7 @@ if(function_exists('vc_map')){
                      __('Columns 3', $trivision_theme_name) => 3,
                      __('Columns 4', $trivision_theme_name) => 4,
                      __('Columns 2', $trivision_theme_name) => 2,
+                     __('Columns 1', $trivision_theme_name) => 1,
                      __('Columns 5', $trivision_theme_name) => 5,
                     ),
          "description" => __("Select # of columns to show.", $trivision_theme_name)
