@@ -422,6 +422,7 @@ transition: all .5s ease;
 }
 .bg-scale:hover {background-size:100%;}
 .modal-body .container {width: 100%;}
+body.modal-open {padding-right: 0!important;}
 /* WordPress/Plugins overrides */
 .fadeIn{visibility:hidden;}
 

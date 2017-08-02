@@ -1,5 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en">
+ <?php 
+ if (function_exists('qtranxf_getLanguage')) {
+	if( qtranxf_getLanguage() == 'en' ) {
+		$langhtml = qtranxf_getLanguage();
+		$langcss = ' ltr';
+		} 
+	else if( qtranxf_getLanguage() == 'fa' ) { 
+		$langhtml = qtranxf_getLanguage();
+		$langcss = ' rtl';
+		}
+	else {
+		$langhtml = 'en';
+		$langcss = ' ltr';
+	}
+}
+?>
+<html lang="<?php echo $langhtml; ?>">
 	<head>
 	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>	
 	<meta name="description" content="<?php wp_title(); echo ' | '; bloginfo( 'description' ); ?>" />
@@ -39,6 +55,7 @@
 	$menuwidthtest  = get_theme_mod( 'menu_width' );
 	if($menuwidthtest) {$menuwidth = $menuwidthtest;} else {$menuwidth = "container";}
 	$topnavtest  = get_theme_mod( 'topnav_display' );
+	if(!$topnavtest) {$topnavtest = 'on';}
 	
 	//Accent Colors
 	$accenttest = get_theme_mod( 'color_accent' );
@@ -92,7 +109,7 @@
 	#footer-bottom {background-color: rgba(<?php echo $menudropdownbg; ?>, 1)!important;}	
 	#header {background-color: rgba(<?php if ($headertest == 'above') { echo '255,255,255,.85';} else {echo $menudropdownbg.', '.$opacityval2;} ?>);}
 	.header-scroll {background-color: rgba(<?php echo $menubg; ?>, <?php echo $opacityval2; ?>)!important;}	
-	.header-scroll .nav-centered {float:right;background-color:transparent!important;}
+	.header-scroll .nav-centered {background-color:transparent!important;}
 	#body-home, #body-page {padding-top:<?php echo $headerpos; ?>;}
 	#preloader {background-color:<?php echo $preloaderbg; ?>;}
 	.sidr{background-color:<?php echo $copyrightbg; ?>;}
@@ -158,7 +175,7 @@
 				'depth'             => 0,
 				'container'         => 'div',
 				'container_id'      => 'sidr',
-				'menu_class'        => 'sidr-menu',
+				'menu_class'        => 'sidr-menu '.$langcss,
 				'fallback_cb'       => false,
 				'walker'            => '')
 			);
@@ -238,8 +255,9 @@
 						<li class="hidden-sm"><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook fa-lg"></i></a></li>
 						<li class="hidden-sm"><a target="_blank" href="https://www.pinterest.com/"><i class="fa fa-pinterest fa-lg"></i></a></li>
 						<li class="hidden-sm"><a target="_blank" href="https://www.instagram.com/"><i class="fa fa-instagram fa-lg"></i></a></li>
-						<?php } ?>
+						<?php } ?>						
 					</ul>
+					<?php //if (function_exists('qtranxf_generateLanguageSelectCode')) {echo qtranxf_generateLanguageSelectCode(‘both’);} ?>
 					<?php if ($statusslug) { ?>
 					<div class="modal fade in" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 					  <div class="modal-dialog">
@@ -272,9 +290,9 @@
 				</div>
 				</div>
 				<div id="main-header">
-					<div class="<?php echo $menuwidth; ?>">
+					<div class="<?php echo $menuwidth.' top-'.$topnavtest; ?>">
 						<?php //echo get_theme_mod( 'logo_main' ); ?>
-						<div class="<?php if($topnavtest = "centered"){echo 'logo-centered';} else{echo 'pull-left';} ?>"><a href="<?php bloginfo('url');?>"><img src="<?php $logotest = get_theme_mod( 'logo_main' ); if ($logotest) { echo $logotest; } else { echo bloginfo('template_directory').'/images/logo-tagline.svg'; } ?>" class="svg-logo<?php if ($inverttest == 'knockout') { echo ' svg';} ?>" /></a>
+						<div class="<?php if($topnavtest == "centered"){echo 'logo-centered';} else{echo 'pull-left';} ?>"><a href="<?php bloginfo('url');?>"><img src="<?php $logotest = get_theme_mod( 'logo_main' ); if ($logotest) { echo $logotest; } else { echo bloginfo('template_directory').'/images/logo-tagline.svg'; } ?>" class="svg-logo<?php if ($inverttest == 'knockout') { echo ' svg';} ?>" /></a>
 						<?php if (get_theme_mod( 'text_phone' )) {?>
 						<div class="sticky-tel hidden-lg hidden-md hidden-sm hidden-xs">
 						<a href="tel:+17037133332"><h3><?php echo get_theme_mod( 'text_phone' ); ?></h3></a>
@@ -282,7 +300,7 @@
 						<?php } ?>
 						</div>
 						<?php
-						if($topnavtest = "centered"){$navalign = 'nav-centered header-scroll';} else{$navalign = 'pull-right';}
+						if($topnavtest == "centered"){$navalign = 'nav-centered header-scroll';} else{$navalign = 'pull-right';}
 						if($topnavtest != "off") {
 							wp_nav_menu( array(
 								'menu'              => 'primary',
@@ -291,7 +309,7 @@
 								'container'         => 'div',
 								'container_class'   => 'collapse navbar-collapse '.$navalign,
 								'container_id'      => 'primary-nav',
-								'menu_class'        => 'nav navbar-nav',
+								'menu_class'        => 'nav navbar-nav '.$langcss,
 								'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
 								'walker'            => new wp_bootstrap_navwalker())
 							);
@@ -344,7 +362,7 @@
 					}
 				}
 				?>
-				<section id="body-page">
+				<section id="body-page" class="post-<?php echo $posttest.$langcss2; ?>">
 				<div id="page-heading" class="heading-transparent text-center pt-<?php echo $this_type; ?>" style="background-image:url(<?php echo $bannerimg; ?>)">
 				<div class="header-bg"></div>
 					<div class="container">
@@ -364,7 +382,7 @@
 				<?php } 
 				if (is_search()) { 								
 				?>
-				<section id="body-page">
+				<section id="body-page" class="post-<?php echo $posttest.$langcss2; ?>">
 				<div id="page-heading" class="heading-transparent text-center" style="background-image:url(<?php echo $searchimg; ?>)">
 				<div class="header-bg"></div>
 					<div class="container">
@@ -397,7 +415,7 @@
 					if($posttest=='page') {$posttitle='Events';}
 				}
 				?>
-				<section id="body-page" class="post-<?php echo $posttest; ?>">
+				<section id="body-page" class="post-<?php echo $posttest.$langcss2; ?>">
 				<?php if ($posttest == "bio") { ?>
 				<div class="wpb_wrapper wow fadeIn animated animated" style="visibility: visible;"><div class="cut2 cut-blue"></div><div class="cut2 cut-green"></div></div>
 				<?php } else { ?>

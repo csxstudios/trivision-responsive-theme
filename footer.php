@@ -1,6 +1,6 @@
  			<?php
 			//$pretest = get_theme_mod('prefooter_title');
-			$pretest = "Our Partners";
+			//$pretest = "Our Partners";
 			if ($pretest!='') {$prefooter = get_page_by_title( $pretest );}
 			if ($prefooter) { ?>
 			<div id="partners" class="hidden-sm hidden-xs pad-40">
@@ -44,6 +44,10 @@
 					} ?>
 					</div>
 				<?php } ?>
+				</div>
+				<div class="row">
+				<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Widget Full-Width')) : ?>
+				<?php endif; ?>
 				</div>
 				<?php }
 				$copydivtest = get_theme_mod( 'copyright_div' );
@@ -150,6 +154,12 @@
 		//show fixed navbar
 		//var st_pos = jQuery("#page").scrollTop();
 		//console.log(st_pos);
+		
+		$('#sidr #menu-primary .menu-item-has-children > a').click(function(e) {
+			e.preventDefault();
+			$(this).next().slideToggle();
+		});
+		
 		jQuery(window).bind("scroll", function() {
 		if (jQuery(this).scrollTop() > 80) {
 			jQuery('#top-menu').slideUp();

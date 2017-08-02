@@ -10,8 +10,7 @@ Version: 2.0
 .nav-centered > ul {display: inline-block;}
 .nav-centered > .nav > li > a {padding: 20px;}
 .logo-centered {text-align:center;padding:15px 0;}
-.header-scroll .logo-centered {float:left;padding:0 15px;}
-.header-scroll .nav-centered > .nav > li > a {padding: 46px 20px;}
+.header-scroll .logo-centered {padding:0 15px;}
 figcaption {
 font-size: 90%;
 text-transform: uppercase;
