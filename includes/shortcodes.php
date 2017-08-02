@@ -13,8 +13,28 @@ function folio_gallery_func($atts, $content = null){
 	$num1 = (!empty($num) ? $num : 8);
 
 	ob_start(); ?> 
+	<div class="container">
+        <!-- portfolio filter begin -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul id="filters" class="wow fadeInUp" data-wow-delay="0s">
+                	<li><a href="#" data-filter="*" class="selected"><?php echo htmlspecialchars_decode($all1); ?></a></li>                    
+                    <?php 
+	                  $categories = get_terms('category');
+	                   foreach( (array)$categories as $categorie){
+	                    $cat_name = $categorie->name;
+	                    $cat_slug = $categorie->slug;
+	                    $cat_count = $categorie->count;
+	                  ?>
+	                  <li><a href="#" data-filter=".<?php echo htmlspecialchars_decode( $cat_slug ); ?>"><?php echo htmlspecialchars_decode( $cat_name ); ?></a></li>
+	                <?php } ?>                   
+                </ul>
+            </div>
+        </div>
+        <!-- portfolio filter close -->
+    </div>
 
-	    <div id="our-work" class="gallery zoom-gallery full-gallery de-gallery pf_full_width <?php if ($columns == 2) {echo 'pf_2_cols'; }elseif ($columns == 3) { echo 'pf_3_cols'; }else{} ?>">
+	    <div id="our-work" class="gallery zoom-gallery full-gallery de-gallery pf_full_width <?php if ($columns == 2) {echo 'pf_2_cols'; }elseif ($columns == 3) { echo 'pf_3_cols'; }else{} ?> wow fadeInUp" data-wow-delay=".3s">
 	        <?php 
 	          $args = array(   
 	            'post_type' => 'portfolio',
@@ -23,7 +43,7 @@ function folio_gallery_func($atts, $content = null){
 	          );  
 	          $wp_query = new WP_Query($args);
 	          while ($wp_query -> have_posts()) : $wp_query -> the_post(); 
-	          $cates = get_the_terms(get_the_ID(),'categories');
+	          $cates = get_the_terms(get_the_ID(),'category');
 	          $cate_slug = '';
 	              foreach((array)$cates as $cate){
 	              if(count($cates)>0){	                
@@ -33,13 +53,13 @@ function folio_gallery_func($atts, $content = null){
 	          $format = get_post_format($post->ID);	
 	          $link_video = get_post_meta(get_the_ID(),'_cmb_link_video', true);
 			  $workthumb = get_post_meta(get_the_ID(), 'wpcf-portfolio-thumbnail', true);
-	        ?><div class="item <?php echo esc_attr($cate_slug); ?>">
+	        ?><div class="portfolio-item <?php echo esc_attr($cate_slug); ?>item">
 	<div class="picframe">
 		<a class="<?php if($format=='video'){echo 'popup-youtube';}else{echo 'image-popup-gallery';} ?>" title="<?php the_title(); ?>" href="<?php echo get_page_link(); ?>">
 			<span class="overlay">
 				<span class="pf_text">
 					<span class="project-name"><?php the_title(); ?></span>
-					<span class="project-subtitle"><!-- carousel --><?php echo do_shortcode('[types field="portfolio-subtitle"][/types]'); ?><!-- /carousel --></span>
+					<span class="project-subtitle"><?php echo do_shortcode('[types field="portfolio-subtitle"][/types]'); ?></span>
 				</span>
 			</span>
 		</a>
@@ -564,6 +584,7 @@ function custom_loop_func($atts, $content = null){
 			<h4 class="strong"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h4>
 			<?php if ($excerpton == 1) {
 				if ($excerptl) {echo excerpt($excerptl);} else {the_excerpt();}
+				if ($imgmore) {echo '<div class="img-readmore"><a href="'.$link.'"><img src="'.$readmoreimg.'" alt="Read More" /></a></div>';}
 			}?>
 			</div>
 			</div>
